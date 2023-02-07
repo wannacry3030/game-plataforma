@@ -4,14 +4,13 @@ import sys
 
 #INICIANDO E CRIANDO AS CONSTANTES
 pygame.init()
-vec = pygame.math.Vector2 #definindo 2 dimensões
 
+vec = pygame.math.Vector2 #definindo 2 dimensões
 ALTURA = 450
 LARGURA = 400
 ACC = 0.5
 FRIC = -0.12
 FPS = 60
-
 FramePerSec = pygame.time.Clock()
 
 displaysurface = pygame.display.set_mode((LARGURA,ALTURA))
@@ -29,6 +28,28 @@ class Player(pygame.sprite.Sprite):
         self.vel = vec(0,0)
         self.acc = vec(0,0)
 
+    #função de movimento
+    def move(self):
+        self.acc = vec(0,0)
+        
+        pressed_keys = pygame.key.get_pressed()
+  #IMPLEMENTANDO OS MOVIMENTOS, usando kinematics e equações de motion
+        if pressed_keys[K_LEFT]:
+            self.acc.x = -ACC
+        if pressed_keys[K_RIGHT]:
+            self.acc.x = ACC
+    
+        self.acc.x += self.vel.x * FRIC
+        self.vel += self.acc
+        self.pos += self.vel + 0.5 * self.acc
+        
+        if self.pos.x > LARGURA:
+            self.pos.x = 0
+        if self.pos.x < 0:
+            self.pos.x = LARGURA
+            
+        self.rect.midbottom = self.pos
+      
 #classe        
 class platform(pygame.sprite.Sprite):
     def __init__(self):
@@ -46,6 +67,8 @@ all_sprites = pygame.sprite.Group()
 all_sprites.add(PT1)
 all_sprites.add(P1)
 
+
+
 while True:
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -54,22 +77,11 @@ while True:
             
     displaysurface.fill((0,0,0))
     
+    P1.move()
     for entity in all_sprites:
         displaysurface.blit(entity.surf, entity.rect)
         
     pygame.display.update()
     FramePerSec.tick(FPS)
     
-#IMPLEMENTANDO OS MOVIMENTOS, usando kinematics e equações de motion
 
-#função de movimento
-def movimento(self):
-    self.acc = vec(0,0)
-    
-    pressed_keys = pygame.key.get_pressed()
-
-    if pressed_keys[K_LEFT]:
-        self.acc.x = -ACC
-    if pressed_keys[K_RIGHT]:
-        self.acc.x = ACC
-  
