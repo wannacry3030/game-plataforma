@@ -23,12 +23,23 @@ class Player(pygame.sprite.Sprite):
         super().__init__()
         self.surf = pygame.Surface((30,30))
         self.surf.fill((128,255,40))
-        self.rect = self.surf.get_rect(center = (10, 420))
+        self.rect = self.surf.get_rect()
         #criando variavels com 2 dimensões
         self.pos = vec((10,385))
         self.vel = vec(0,0)
         self.acc = vec(0,0)
 
+#função de movimento
+def movimento(self):
+    self.acc = vec(0,0)
+    
+    pressed_keys = pygame.key.get_pressed()
+
+    if pressed_keys[K_LEFT]:
+        self.acc.x = -ACC
+    if pressed_keys[K_RIGHT]:
+        self.acc.x = ACC
+  
 #classe        
 class platform(pygame.sprite.Sprite):
     def __init__(self):
