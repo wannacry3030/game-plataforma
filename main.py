@@ -29,17 +29,6 @@ class Player(pygame.sprite.Sprite):
         self.vel = vec(0,0)
         self.acc = vec(0,0)
 
-#função de movimento
-def movimento(self):
-    self.acc = vec(0,0)
-    
-    pressed_keys = pygame.key.get_pressed()
-
-    if pressed_keys[K_LEFT]:
-        self.acc.x = -ACC
-    if pressed_keys[K_RIGHT]:
-        self.acc.x = ACC
-  
 #classe        
 class platform(pygame.sprite.Sprite):
     def __init__(self):
@@ -72,3 +61,15 @@ while True:
     FramePerSec.tick(FPS)
     
 #IMPLEMENTANDO OS MOVIMENTOS, usando kinematics e equações de motion
+
+#função de movimento
+def movimento(self):
+    self.acc = vec(0,0)
+    
+    pressed_keys = pygame.key.get_pressed()
+
+    if pressed_keys[K_LEFT]:
+        self.acc.x = -ACC
+    if pressed_keys[K_RIGHT]:
+        self.acc.x = ACC
+  
