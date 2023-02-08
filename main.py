@@ -1,6 +1,7 @@
 import pygame
 from pygame.locals import*
 import sys
+import random
 
 #INICIANDO E CRIANDO AS CONSTANTES
 pygame.init()
@@ -50,9 +51,17 @@ class Player(pygame.sprite.Sprite):
             
         self.rect.midbottom = self.pos
         
-    def jump(self):
-        self.vel.y = -15
+    def update(self):
+         hits = pygame.sprite.spritecollide(P1,platforms,False)
+         if P1.vel.y > 0:        
+            if hits:
+                self.pos.y = hits[0].rect.top + 1
+                self.vel.y = 0
         
+    def jump(self):
+        hits = pygame.sprite.spritecollide(self, platforms, False)
+        if hits:
+            self.vel.y = -15       
     
 #classe        
 class platform(pygame.sprite.Sprite):
@@ -62,11 +71,9 @@ class platform(pygame.sprite.Sprite):
         self.surf.fill((255,0,0))#função
         self.rect = self.surf.get_rect(center = (LARGURA/2, ALTURA - 10))#get_rect é o metodo, center= é o parametro
     
-    def update(self):
-         hits = pygame.sprite.spritecollide(P1,platforms,False)
-         if hits:
-             self.pos.y = hits[0].rect.top + 1
-             self.vel.y = 0
+    def move(self):
+        pass
+
         
 #objetos= pt1: plataforma1, p1: player1       
 PT1 = platform()
