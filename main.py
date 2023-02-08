@@ -50,12 +50,9 @@ class Player(pygame.sprite.Sprite):
             
         self.rect.midbottom = self.pos
         
-    def update(self):
-         hits = pygame.sprite.spritecollide(P1,platforms,False)
-         if hits:
-             self.pos.y = hits[0].rect.top + 1
-             self.vel.y = 0
-             
+    def jump(self):
+        self.vel.y = -15
+        
     
 #classe        
 class platform(pygame.sprite.Sprite):
@@ -64,6 +61,12 @@ class platform(pygame.sprite.Sprite):
         self.surf = pygame.Surface((LARGURA, 20))
         self.surf.fill((255,0,0))#função
         self.rect = self.surf.get_rect(center = (LARGURA/2, ALTURA - 10))#get_rect é o metodo, center= é o parametro
+    
+    def update(self):
+         hits = pygame.sprite.spritecollide(P1,platforms,False)
+         if hits:
+             self.pos.y = hits[0].rect.top + 1
+             self.vel.y = 0
         
 #objetos= pt1: plataforma1, p1: player1       
 PT1 = platform()
@@ -81,6 +84,9 @@ while True:
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                P1.jump()
             
     displaysurface.fill((0,0,0))
     
