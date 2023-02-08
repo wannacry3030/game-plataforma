@@ -52,7 +52,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.midbottom = self.pos
         
     def update(self):
-         hits = pygame.sprite.spritecollide(P1,platforms,False)
+         hits = pygame.sprite.spritecollide(P1 ,platforms , False)
          if P1.vel.y > 0:        
             if hits:
                 self.pos.y = hits[0].rect.top + 1
@@ -85,7 +85,7 @@ all_sprites.add(PT1)
 all_sprites.add(P1)
 
 platforms = pygame.sprite.Group()
-platform.add(PT1)
+platforms.add(PT1)
 
 while True:
     for event in pygame.event.get():
