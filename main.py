@@ -30,7 +30,7 @@ class Player(pygame.sprite.Sprite):
 
     #função de movimento
     def move(self):
-        self.acc = vec(0,0)
+        self.acc = vec(0,0.5)
         
         pressed_keys = pygame.key.get_pressed()
   #IMPLEMENTANDO OS MOVIMENTOS, usando kinematics e equações de motion
