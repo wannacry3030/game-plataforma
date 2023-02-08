@@ -49,7 +49,14 @@ class Player(pygame.sprite.Sprite):
             self.pos.x = LARGURA
             
         self.rect.midbottom = self.pos
-      
+        
+    def update(self):
+         hits = pygame.sprite.spritecollide(P1,platforms,False)
+         if hits:
+             self.pos.y = hits[0].rect.top + 1
+             self.vel.y = 0
+             
+    
 #classe        
 class platform(pygame.sprite.Sprite):
     def __init__(self):
@@ -66,8 +73,8 @@ P1 = Player()
 all_sprites = pygame.sprite.Group()
 all_sprites.add(PT1)
 all_sprites.add(P1)
-
-
+platforms = pygame.sprite.Group()
+platform.add(PT1)
 
 while True:
     for event in pygame.event.get():
