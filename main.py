@@ -83,6 +83,7 @@ P1 = Player()
 all_sprites = pygame.sprite.Group()
 all_sprites.add(PT1)
 all_sprites.add(P1)
+
 platforms = pygame.sprite.Group()
 platform.add(PT1)
 
@@ -96,10 +97,12 @@ while True:
                 P1.jump()
             
     displaysurface.fill((0,0,0))
+    P1.update()
     
     P1.move()
     for entity in all_sprites:
         displaysurface.blit(entity.surf, entity.rect)
+        entity.move()
         
     pygame.display.update()
     FramePerSec.tick(FPS)
